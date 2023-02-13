@@ -1,13 +1,9 @@
 <?php
 
-namespace models;
+namespace App\models;
 
 class User
 {
-    public $id;
-    public $title;
-    public $content;
-
     static function get()
     {
         return [

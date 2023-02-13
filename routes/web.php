@@ -2,11 +2,10 @@
 
 namespace routes;
 
-require_once "src/controllers/UsersController.php";
-use controllers\UsersController;
+require_once './vendor/autoload.php';
 
-require_once "src/middlewares/auth.php";
-use middlewares\Auth;
+use App\Controllers\UsersController;
+use App\Middlewares\Auth;
 
 $webRoutes = [
     "/" => [

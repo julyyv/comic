@@ -1,26 +1,24 @@
 <?php
 
-namespace controllers;
+namespace App\Controllers;
 
-require_once "helpers/helpers.php";
+require_once './vendor/autoload.php';
 
-use \helpers\helpers;
+use \Helpers\Helpers;
 
-require_once "src/models/User.php";
-
-use \models\User;
+use App\Models\User;
 
 class UsersController
 {
     public static function index()
     {
         $user = User::get();
-        return helpers::view(
+        return Helpers::view(
             "users",    // view name
             [   // data 
                 "user" => $user
             ],
-            "Users" // layout, default = default
+            // "Users" // layout, default = default
         );
     }
 }
