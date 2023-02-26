@@ -12,6 +12,7 @@
     },
     "require": {
         "vlucas/phpdotenv": "^5.5",
-        "bramus/router": "~1.6"
+        "bramus/router": "~1.6",
+        "illuminate/database": "^10.1"
     }
 }

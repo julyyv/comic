@@ -4,29 +4,18 @@ namespace Routes;
 
 require_once './vendor/autoload.php';
 
+use Bramus\Router\Router;
 use App\Controllers\UsersController;
-use App\Middlewares\Auth;
 
-class WebRoutes
-{
-    static function routes()
-    {
-        return [
-            "/" => [
-                "GET" => [
-                    "middlewares" => [
-                        // Auth::class,
-                    ],
-                    "controller" => function () {
-                        echo "welcome!";
-                    },
-                ],
-            ],
-            "/users" => [
-                "GET" => [
-                    "controller" => UsersController::index(...),
-                ],
-            ]
-        ];
-    }
-}
+$router = new Router();
+$router->setNamespace('\App\Controllers');
+
+$router->set404(function() {
+    header('HTTP/1.1 404 Not Found');
+});
+
+$router->get('/users', "UsersController@index");
+
+
+$router->run();
+

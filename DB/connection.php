@@ -4,27 +4,20 @@ namespace DB;
 
 use PDO;
 use PDOException;
+use Illuminate\Database\Capsule\Manager as Capsule;
 
-class DB
-{
-    private static $instance = NULL;
+$capsule = new Capsule;
 
-    public static function getInstance()
-    {
-        if (!isset(self::$instance)) {
-            try {
-                self::$instance =
-                    new PDO(
-                        'mysql:host=' . $_ENV["DATABASE_DSN"] .
-                            ';dbname=' . $_ENV["DATABASE_NAME"],
-                        $_ENV["DATABASE_USERNAME"],
-                        $_ENV["DATABASE_PASSWORD"]
-                    );
-                self::$instance->exec("SET NAMES 'utf8'");
-            } catch (PDOException $ex) {
-                die($ex->getMessage());
-            }
-        }
-        return self::$instance;
-    }
-}
+$capsule->addConnection([
+    'driver' => 'mysql',
+    'host' => $_ENV["DATABASE_HOST"],
+    'database' => $_ENV["DATABASE_NAME"],
+    'username' => $_ENV["DATABASE_USERNAME"],
+    'password' => $_ENV["DATABASE_PASSWORD"],
+    'charset' => 'utf8',
+    'collation' => 'utf8_unicode_ci',
+    'prefix' => '',
+]);
+
+$capsule->setAsGlobal();
+$capsule->bootEloquent();

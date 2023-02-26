@@ -12,13 +12,18 @@ class UsersController
 {
     public static function index()
     {
-        $user = User::get();
+        // $user = new User;
+        // $user->id = 5;
+        // $user->username = "username 5";
+        // $user->save();
+
+        $user = User::where("id", 1)->first();
         return Helpers::view(
-            "users",    // view name
-            [   // data 
+            "users",    
+            [ 
                 "user" => $user
             ],
-            // "Users" // layout, default = default
+            "main", // layout
         );
     }
 }

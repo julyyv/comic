@@ -18,7 +18,6 @@ class templateController
             [   // data 
                 "test" => $data
             ],
-            // "template" // layout, default = default
         );
     }
 }
