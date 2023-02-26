@@ -4,7 +4,7 @@ namespace App\Controllers;
 
 require_once './vendor/autoload.php';
 
-use \Helpers\Helpers;
+use Helpers\Helpers;
 
 use App\Models\User;
 

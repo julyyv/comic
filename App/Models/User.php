@@ -1,8 +1,10 @@
 <?php
 
-namespace App\models;
+namespace App\Models;
 
-class User
+use App\Models\Model;
+
+class User extends Model
 {
     static function get()
     {

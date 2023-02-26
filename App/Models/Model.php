@@ -2,7 +2,9 @@
 
 namespace App\Models;
 
-class User
+use DB\DB;
+
+class Model
 {
     static function get()
     {

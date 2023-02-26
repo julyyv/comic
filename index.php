@@ -1,37 +1,35 @@
 <?php
 
-namespace index;
+namespace Index;
 
-require_once "DB/connection.php";
+require_once './vendor/autoload.php';
 
 use DB\DB;
-
-require_once "routes/web.php";
-
-use routes\webRoutes;
-
-require_once "routes/api.php";
-
-use routes\apiRoutes;
+use Dotenv\Dotenv;
+use Routes\APIRoutes;
+use Routes\WebRoutes;
 
 // test
 
 // echo $_SERVER['REQUEST_METHOD'];
 // echo $_SERVER['REQUEST_URI'];
-// print_r($webRoutes);
+// print_r(WebRouter::$routes);
 
 // test
 
-$routes_list = [
-    $webRoutes,
-    $apiRoutes,
+$dotenv = Dotenv::createImmutable(__DIR__);
+$dotenv->load();
+
+$router_list = [
+    WebRoutes::class,
+    APIRoutes::class,
 ];
 
 $URI = explode("?", $_SERVER['REQUEST_URI'])[0];
 
 $found = FALSE;
-foreach($routes_list as $routes) {
-    if(useRoutes($routes, $URI)) {
+foreach($router_list as $router) {
+    if(useRouter($router, $URI)) {
         $found = TRUE;
         break;
     }
@@ -44,7 +42,8 @@ if(!$found) {
 
 
 
-function useRoutes($routes, $URI) {
+function useRouter($routes, $URI) {
+    $routes = $routes::routes();
     if (
         !isset($routes[$URI]) ||
         !isset($routes[$URI][$_SERVER['REQUEST_METHOD']])
